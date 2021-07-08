@@ -2,6 +2,10 @@
     [{"title":"Title","text":"Test text"},
         {"title":"Monday","text":"Wesley has an appointment with doctor","id":1},
         {"title":"Tuesday","text":"Business Admin Meeting","id":2},
-        {"title":"Wednesday","text": "Psych Evaluation", "id":3}
+        {"title":"Wednesday","text":"Psych Evaluation","id":3},
+        {"title":"Thursday","text":"Volunteer at Soup Kitchen","id":4},
+        {"title":"Friday","text":"Early Sabbath Studies","id":5},
+        {"title":"Saturday","text":"Bowling League Night","id":6},
+        {"title":"Sunday","text":"Lazy Day","id":7}
     ]
 ]

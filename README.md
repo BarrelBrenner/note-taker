@@ -6,6 +6,6 @@ Once that's finished you can begin running the application on server side which 
 
 This application is used for adding, deleting & saving of notes for upcoming ideas/events, followups & more.
 
-You can add notes by typing in boxes for title & description and clicking on pencil icon in top right. You can save item by clicking on floppy disk icon on top right. You can delete item by clicking on trash can icon beside message you wish to delete.
+You can create new notes by clicking on pen icon in top right. You can save item by clicking on floppy disk icon on top right beside pen icon. You can delete item by clicking on trash can icon beside message you wish to delete.
 
 Thank you for your time & take care.

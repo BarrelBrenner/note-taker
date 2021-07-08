@@ -9,8 +9,8 @@ const app = express();
 //This const statement sets up a port listener.
 const PORT = process.env.PORT || 8080;
 
-//This let statement creates (createNoteData) Array.
-let createNoteData = [];
+//This let statement creates (createComInfo) Array. ComInfo is short for Comment Information
+let createComInfo = [];
 
 app.use(express.json());
 app.use(
@@ -23,30 +23,30 @@ app.use(express.static(path.join(__dirname, "public")));
 //This section houses an api call response for notes, then results are sent to browser.
 app.get("/api/notes", function (err, res) {
   try {
-    createNoteData = fs.readFileSync("db/db.json", "utf8");
+    createComInfo = fs.readFileSync("db/db.json", "utf8");
     console.log("SERVER CONNECTION SUCCESSFUL!");
-    createNoteData = JSON.parse(createNoteData);
+    createComInfo = JSON.parse(createComInfo);
   } catch (err) {
     console.log("\n error (catch err app.get):");
     console.log(err);
   }
-  res.json(createNoteData);
+  res.json(createComInfo);
 });
 
 //This section writes a new note to json file and sends it back to browser.
 app.post("/api/notes", function (req, res) {
   try {
-    createNoteData = fs.readFileSync("./db/db.json", "utf8");
-    console.log(createNoteData);
-    createNoteData = JSON.parse(createNoteData);
-    req.body.id = createNoteData.length;
-    createNoteData.push(req.body);
-    createNoteData = JSON.stringify(createNoteData);
-    fs.writeFile("./db/db.json", createNoteData, "utf8", function (err) {
+    createComInfo = fs.readFileSync("./db/db.json", "utf8");
+    console.log(createComInfo);
+    createComInfo = JSON.parse(createComInfo);
+    req.body.id = createComInfo.length;
+    createComInfo.push(req.body);
+    createComInfo = JSON.stringify(createComInfo);
+    fs.writeFile("./db/db.json", createComInfo, "utf8", function (err) {
       if (err) throw err;
     });
 
-    res.json(JSON.parse(createNoteData));
+    res.json(JSON.parse(createComInfo));
   } catch (err) {
     throw err;
     console.error(err);
@@ -56,18 +56,18 @@ app.post("/api/notes", function (req, res) {
 //This section deletes a note and reads json file, afterwards allows you to write new notes to file and sends it back to browser
 app.delete("/api/notes/:id", function (req, res) {
   try {
-    createNoteData = fs.readFileSync("./db/db.json", "utf8");
-    createNoteData = JSON.parse(createNoteData);
-    createNoteData = createNoteData.filter(function (note) {
+    createComInfo = fs.readFileSync("./db/db.json", "utf8");
+    createComInfo = JSON.parse(createComInfo);
+    createComInfo = createComInfo.filter(function (note) {
       return note.id != req.params.id;
     });
-    createNoteData = JSON.stringify(createNoteData);
+    createComInfo = JSON.stringify(createComInfo);
 
-    fs.writeFile("./db/db.json", createNoteData, "utf8", function (err) {
+    fs.writeFile("./db/db.json", createComInfo, "utf8", function (err) {
       if (err) throw err;
     });
 
-    res.send(JSON.parse(createNoteData));
+    res.send(JSON.parse(createComInfo));
   } catch (err) {
     throw err;
     console.log(err);

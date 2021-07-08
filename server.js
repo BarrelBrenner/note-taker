@@ -1,17 +1,17 @@
+//These const statements allow for import of listed dependencies for front end interaction.
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
-// creating a server
+//This const statement creates a server.
 const app = express();
 
-// Setting a port listener
-const PORT = process.env.PORT || 3000;
+//This const statement sets up a port listener.
+const PORT = process.env.PORT || 8080;
 
-//  createNoteData Array
+//This let statement creates (createNoteData) Array.
 let createNoteData = [];
 
-// Setting up middleware body parsing, static, and route
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -20,11 +20,11 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public")));
 
-// api call response for the notes, an having results sent to browser in the form of an array of object
+//This section houses an api call response for notes, then results are sent to browser.
 app.get("/api/notes", function (err, res) {
   try {
     createNoteData = fs.readFileSync("db/db.json", "utf8");
-    console.log("Hello from the SERVER!");
+    console.log("SERVER CONNECTION SUCCESSFUL!");
     createNoteData = JSON.parse(createNoteData);
   } catch (err) {
     console.log("\n error (catch err app.get):");
@@ -33,7 +33,7 @@ app.get("/api/notes", function (err, res) {
   res.json(createNoteData);
 });
 
-// this section writes the new note to the json file and sending back to the browser
+//This section writes a new note to json file and sends it back to browser.
 app.post("/api/notes", function (req, res) {
   try {
     createNoteData = fs.readFileSync("./db/db.json", "utf8");
@@ -53,8 +53,7 @@ app.post("/api/notes", function (req, res) {
   }
 });
 
-// Deleting a note and reading the json file | writing the new notes to the file and sending back to the browser
-
+//This section deletes a note and reads json file, afterwards allows you to write new notes to file and sends it back to browser
 app.delete("/api/notes/:id", function (req, res) {
   try {
     createNoteData = fs.readFileSync("./db/db.json", "utf8");
@@ -75,14 +74,11 @@ app.delete("/api/notes/:id", function (req, res) {
   }
 });
 
-// HTML GET Requests
-
-// when the Get started button is clicked display the note.html Web page
+//When Click Here To Get Started button is clicked, it sends you to note.html webpage, otherwise it defaults back to homepage
 app.get("/notes", function (req, res) {
   res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
-// If no matching route is found, then default to home
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
@@ -91,7 +87,7 @@ app.get("/api/notes", function (req, res) {
   return res.sendFile(path.json(__dirname, "db/db.json"));
 });
 
-// Start the server on the port
+//This section starts server on port
 app.listen(PORT, function () {
-  console.log("SERVER IS LISTENING: " + PORT);
+  console.log("SERVER AT ATTENTION: " + PORT);
 });

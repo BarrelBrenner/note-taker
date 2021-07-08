@@ -6,7 +6,7 @@ const fs = require("fs");
 const app = express();
 
 // Setting a port listener
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 //  createNoteData Array
 let createNoteData = [];
